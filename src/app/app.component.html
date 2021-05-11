@@ -1,0 +1,49 @@
+<app-header></app-header>
+<h1 class="cource">Course</h1>
+<h1 class="student">Students</h1>
+<div class="cource" style="position: absolute; top:255px; left:711px;">
+    <button (click)="on_click()" type="button" class="btn btn-info">Add new course</button>
+    <br><br>
+
+    <form class="search-wrapper">
+        <div>
+            <ng-container *ngIf="visible1">
+                <input type="text" name="name" placeholder="Enter course" #inCourse />
+                <button class="close-icon" type="reset" (click)="on_click()">X</button>
+                <button class="add" type="Submit" name="save" value="Save" (click)="coursedata(inCourse)"
+                    (click)="on_click()"> &#9989;</button>
+            </ng-container>
+        </div>
+    </form>
+</div>
+<div ngbDropdown class="cource" style="position: absolute; top:185px; left:680px;  padding: 15px 32px;
+text-align: center;font-size: 10px;">
+
+    <select class="btn btn-outline-primary" [(ngModel)]="mycdata" id="dropdownBasic1">
+        <option value=0>----select----</option>
+        <option *ngFor="let item of mymap|keyvalue" value={{item.key}}>{{item.key}} </option>
+    </select>
+</div>
+
+<div class="student" style="position: absolute; top:455px; left:711px;">
+    <button (click)="onclick()" type="button" class="btn btn-info">Add new Student</button>
+    <br><br>
+    <form class="search-wrapper" #frm1="ngForm">
+        <div>
+            <ng-container *ngIf="visible && mycdata!==undefined">
+                <input type="text" name="name" placeholder="Enter student" [(ngModel)]="S_data" />
+                <button class="close-icon" type="reset" (click)="onclick()">X</button>
+                <button class="add" type="Submit" name="save" value="Save" (click)="studentdata(mycdata,S_data)"
+                    (click)="onclick()"> &#9989;</button>
+            </ng-container>
+        </div>
+    </form>
+</div>
+<div ngbDropdown class="student" style="position: absolute; top:385px; left:680px; padding: 15px 32px;
+text-align: center;font-size: 10px;">
+
+    <select class="btn btn-outline-primary" id="dropdownBasic1">
+        <option value=0>----select----</option>
+        <option *ngFor="let valu of mymap.get(mycdata) | keyvalue" value={{valu.value}}> {{valu.value}} </option>
+    </select>
+</div>
